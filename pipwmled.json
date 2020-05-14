@@ -1,0 +1,38 @@
+﻿{
+  "BaseCommand": "/usr/local/bin/tlc5947spi",
+  "BaseArgs": "",
+  "Verbose":  false,
+  "Lamps":
+  [
+    {
+      "Name": "TvLampLeft",
+      "Port": 9030,
+      "RedChannel": 0
+    },
+    {
+      "Name": "TvLampMiddle",
+      "Port": 9031,
+      "RedChannel": 3
+    },
+    {
+      "Name": "TvLampRight",
+      "Port": 9032,
+      "RedChannel": 6
+    },
+    {
+      "Name": "StripLightLeft",
+      "Port": 9033,
+      "RedChannel": 9
+    },
+    {
+      "Name": "StripLightTop",
+      "Port": 9034,
+      "RedChannel": 12
+    },
+    {
+      "Name": "StripLightRight",
+      "Port": 9035,
+      "RedChannel": 15
+    }
+  ]
+}
