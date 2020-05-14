@@ -4,7 +4,7 @@ LABEL description="HippoPiPwmDaemon mono image"
 
 WORKDIR /hippopwm
 
-RUN apt-get update && apt-get install git
+RUN apt-get update && apt-get install -y git
 
 RUN git clone -b current --depth 1 https://github.com/morsm/HippoPiPwmLedDaemon.git .
 
