@@ -1,25 +1,28 @@
-FROM mono:latest
+FROM morsm6777/raspbian-stretch-mono:latest
 
-LABEL description="HippoPiPwmDaemon mono image"
+LABEL description="HippoPiPwmDaemon mono container"
 
+# Get and compile WiringPi
+RUN git clone -b final_official_2.50 --depth 1 https://github.com/WiringPi/WiringPi.git \
+    && cd WiringPi \
+    && ./build \
+    && cd .. \
+    && rm -rf WiringPi
+
+# Get and compile tlc5947
+RUN git clone -b current --depth 1 https://github.com/morsm/tlc5947spi.git \
+    && cd tlc5947spi \
+    && g++ -o tlc5947spi -lwiringPi tlc5947spi.cpp
+
+
+# Get and compile HippoPwm daemon
 WORKDIR /hippopwm
 
-RUN apt-get update
-RUN apt-get install -y git
-
-RUN git clone -b current --depth 1 https://github.com/morsm/HippoPiPwmLedDaemon.git .
-
-RUN nuget restore
-
-RUN msbuild -p:Configuration=Release *csproj
+RUN git clone -b current --depth 1 https://github.com/morsm/HippoPiPwmLedDaemon.git . \
+    && nuget restore \
+    && msbuild -p:Configuration=Release *csproj
 
 COPY pipwmled.json bin/Release/
-COPY tlc5947spi /usr/local/bin/
-COPY wiringpi-latest.deb .
-
-RUN dpkg -i wiringpi-latest.deb
-
-EXPOSE 9030 9031 9032 9033 9034 9035
 
 WORKDIR /hippopwm/bin/Release
 

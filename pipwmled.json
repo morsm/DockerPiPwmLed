@@ -1,5 +1,5 @@
 ﻿{
-  "BaseCommand": "/usr/local/bin/tlc5947spi",
+  "BaseCommand": "/tlc5947spi/tlc5947spi",
   "BaseArgs": "",
   "Verbose":  false,
   "Lamps":
